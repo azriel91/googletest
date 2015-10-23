@@ -71,6 +71,11 @@ cxx_library(gtest "${cxx_strict}" src/gtest-all.cc)
 cxx_library(gtest_main "${cxx_strict}" src/gtest_main.cc)
 target_link_libraries(gtest_main gtest)
 
+if(BUILD_SHARED_LIBS)
+  target_compile_definitions(gtest PRIVATE "-DGTEST_CREATE_SHARED_LIBRARY=1"
+                                   INTERFACE "-DGTEST_LINKED_AS_SHARED_LIBRARY=1")
+endif()
+
 ########################################################################
 #
 # Samples on how to link user tests with gtest or gtest_main.
