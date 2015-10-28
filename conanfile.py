@@ -47,10 +47,12 @@ class GoogleTestConan(ConanFile):
         self.copy('README', dst='.', src='.')
 
         # Built artifacts
-        self.copy('libgtest.so', dst='lib', src=self.build_dir)
-        self.copy('libgtest_main.so', dst='lib', src=self.build_dir)
-        self.copy('libgtest.a', dst='lib', src=self.build_dir)
-        self.copy('libgtest_main.a', dst='lib', src=self.build_dir)
+        if self.options['BUILD_SHARED_LIBS'] == 'ON':
+            self.copy('libgtest.so', dst='lib', src=self.build_dir)
+            self.copy('libgtest_main.so', dst='lib', src=self.build_dir)
+        else:
+            self.copy('libgtest.a', dst='lib', src=self.build_dir)
+            self.copy('libgtest_main.a', dst='lib', src=self.build_dir)
 
         # IDE sample files (commented code intentionally left here)
         # self.copy('*', dst='codegear', src='codegear')
