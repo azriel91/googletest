@@ -70,10 +70,7 @@ class GoogleTestConan(ConanFile):
         # Files not used by downstream
         # self.copy('*', dst='build-aux', src='build-aux')
         # self.copy('*', dst='scripts', src='scripts')
-        # self.copy('*', dst='src', src='src')
         # self.copy('*', dst='test', src='test')
 
-    def package_info(self):
-        # We don't specify gtest in self.cpp_info.libs because that is appended to CONAN_LIBS, which is currently used
-        # for non-test linking
-        pass
+        # google mock compiles with gtest sources
+        self.copy('*', dst='src', src='src')
