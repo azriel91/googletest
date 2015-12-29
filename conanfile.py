@@ -84,3 +84,7 @@ class GoogleTestConan(ConanFile):
 
         # google mock compiles with gtest sources
         self.copy('*', dst='src', src='src')
+
+    def package_info(self):
+        if self.settings.os == "Linux" or self.options['GTEST_HAS_PTHREAD'] == '1':
+            self.cpp_info.libs.append("pthread")
